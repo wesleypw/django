@@ -1,1 +1,1 @@
-aprndendo a django
+aprndendo a progarmar em django
