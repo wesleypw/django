@@ -1,4 +1,6 @@
 import pandas as pd 
+import win32com.client as win32
+
 
 #importar a base de dados
 tabela_de_vendas = pd.read_excel('Vendas.xlsx')
@@ -26,7 +28,25 @@ print(quantidade)
 print("-" * 50)
 
 ticket_medio = (faturamento['Valor Final'] / quantidade['Quantidade']).to_frame()
-
+ticket_medio = ticket_medio.rename(columns={0: 'Ticket medio'})
 print(ticket_medio)
 
 #enviear um email com o relatorio
+
+outlook = win32.Dispatch('outlook.application')
+mail = outlook.CreateItem(0)
+mail.To = 'to address'
+mail.Subject = 'Massege subject'
+mail.HTMLBody =f'''
+
+<h2>HTML Message body</h2>
+
+<p> esse conteudo é uma mistura de html e python</p>
+
+<p> que envia um email"outlook" e enviando</p>
+
+
+'''
+
+
+mail.Send()
